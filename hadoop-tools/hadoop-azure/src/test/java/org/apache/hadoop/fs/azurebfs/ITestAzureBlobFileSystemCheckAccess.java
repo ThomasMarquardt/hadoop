@@ -79,6 +79,7 @@ public class ITestAzureBlobFileSystemCheckAccess
     this.isCheckAccessEnabled = getConfiguration().isCheckAccessEnabled();
     this.isHNSEnabled = getConfiguration()
         .getBoolean(FS_AZURE_TEST_NAMESPACE_ENABLED_ACCOUNT, false);
+    checkPrerequisites();
     setTestUserFs();
   }
 
@@ -299,6 +300,7 @@ public class ITestAzureBlobFileSystemCheckAccess
         isHNSEnabled);
     Assume.assumeTrue(FS_AZURE_ENABLE_CHECK_ACCESS + " is false",
         isCheckAccessEnabled);
+    Assume.assumeTrue(getAuthType() == AuthType.OAuth);
     checkIfConfigIsSet(FS_AZURE_BLOB_FS_CHECKACCESS_TEST_CLIENT_ID);
     checkIfConfigIsSet(FS_AZURE_BLOB_FS_CHECKACCESS_TEST_CLIENT_SECRET);
     checkIfConfigIsSet(FS_AZURE_BLOB_FS_CHECKACCESS_TEST_USER_GUID);
